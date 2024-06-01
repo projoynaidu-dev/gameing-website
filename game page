@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Website</title>
+    <link href="https://fonts.googleapis.com/css2?
+family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #121212;
+            color: #fff;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 20px;
+            box-sizing: border-box;
+            transition: background 0.3s;
+            z-index: 1000;
+        }
+        header.scrolled {
+            background: #000;
+        }
+        .logo img {
+            height: 60px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #00ff00; /* Neon green for hover */
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .search-bar input {
+            width: 200px;
+            padding: 10px 15px;
+            border: 1px solid #333;
+            border-radius: 20px;
+            background: #222;
+            color: #fff;
+            transition: width 0.3s, border-color 0.3s;
+        }
+        .search-bar input:focus {
+            width: 250px;
+            border-color: #00ff00; /* Neon green for focus */
+            outline: none;
+        }
+        .search-bar button {
+            position: absolute;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        .user-menu {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .user-menu img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .user-menu img:hover {
+            transform: scale(1.1);
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .dropdown a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .dropdown a:hover {
+            background: #444;
+        }
+        .user-menu:hover .dropdown {
+            display: block;
+        }
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            nav {
+                display: none;
+            }
+            .user-menu{
+                margin-right: 50px;
+                align-items: center;
+                
+            }
+            .user-menu img {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: transform 0.3s;
+            }
+            .menu-toggle {
+                width: 40px;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                display: block;
+                cursor: pointer;
+            }
+            .menu-toggle .bar {
+                display: block;
+                width: 30px;
+                height: 5px;
+                margin: 5px auto;
+                background-color: #fff;
+                transition: all 0.3s;
+            }
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: #000;
+                padding: 20px;
+                
+            }
+            nav.open a {
+                margin: 10px 0;
+                /* text-align: center; */
+                text-align: left;
+                font-size: 25px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .carousel-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            position: relative;
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 1.0;
+            
+           
+
+        }
+        .carousel-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+        }
+        .carousel-content h1 {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .carousel-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .carousel-content a {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            background-color: #00ff00; /* Neon green */
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .carousel-content a:hover {
+            background-color: #00cc00;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-controls .arrow {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            transition: background 0.3s;
+        }
+        .carousel-controls .arrow:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        .carousel-indicators .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #888;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .carousel-indicators .dot.active {
+            background-color: #fff;
+        }
+        
+        /* Featured Games Section */
+        .featured-games {
+            padding: 50px 0;
+            background: #222;
+            text-align: center;
+        }
+        .game-card {
+            display: inline-block;
+            width: calc(33.33% - 40px);
+            margin: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .game-card:hover {
+            transform: translateY(-10px);
+        }
+        .game-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid #00ff00; /* Neon green */
+        }
+        .game-card h2 {
+            padding: 20px;
+            font-size: 24px;
+            text-transform: capitalize;
+        }
+        .game-card p {
+            padding: 0 20px;
+            font-size: 18px;
+        }
+        
+        /* News and Updates Section */
+        .news-updates {
+            padding: 50px 0;
+            background: #333;
+            text-align: center;
+        }
+        .news-item {
+            display: inline-block;
+            width: calc(33.33% - 40px);
+            margin: 20px;
+            background: #444;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .news-item:hover {
+            transform: translateY(-10px);
+        }
+        .news-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .news-item h2 {
+            padding: 20px;
+            font-size: 20px;
+            text-align: left;
+        }
+        .news-item a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color:#00ff00;
+            /* background-color: #00ff00; Neon green */
+            text-decoration: none;
+            /* border-radius: 5px; */
+            transition: background 0.3s;
+        }
+        .news-item a:hover {
+            /* background-color: #00cc00; */
+            /* scroll-behavior: smooth; */
+            color: #00cc00;
+
+
+        }
+        
+        /* Community Highlights Section */
+        .community-highlights {
+            padding: 50px 0;
+            background: #222;
+            text-align: center;
+        }
+        .highlight-card {
+            display: inline-block;
+            width: calc(33.33% - 40px);
+            margin: 20px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .highlight-card:hover {
+            transform: translateY(-10px);
+        }
+        .highlight-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .highlight-card h2 {
+            padding: 20px;
+            font-size: 20px;
+            text-align: left;
+            opacity: 0.8;
+        
+        }
+        .highlight-card h2 a{
+            text-decoration: none;
+            color: #00ff00;
+        }
+        .highlight-card h2 a:hover{
+            color: #00cc00;
+        }
+
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="logo">
+            <img src="https://logos.textgiraffe.com/logos/logo-name/Games-designstyle-
+games-m.png" alt="Logo">
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav id="nav">
+            <a href="#">Home</a>
+            <a href="#">Games</a>
+            <a href="#">News</a>
+            <a href="#">Community</a>
+            <a href="#">About</a>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search games...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="user-menu">
+            <img src="https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-
+avatar-image-for-profile-png-image_13001877.png" alt="User Avatar">
+            <div class="dropdown">
+                <a href="#">Profile</a>
+                <a href="#">Settings</a>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero">
+
+        <!-- Hero Section Content -->
+        <div class="hero">
+            <div class="carousel-container">
+                <div class="carousel-slide" style="background-image: 
+url('https://wallpapers.com/images/hd/neon-gaming-3mmmb9y20r5yyqvu.jpg');">
+                    <div class="carousel-content">
+                        <h1>New Release!</h1>
+                        <p>Experience the thrill of our latest game</p>
+                        <a href="#">Play Now</a>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: 
+url('https://images.ctfassets.net/vfkpgemp7ek3/1376006539/4b824eaa3e810206659b414b7b27f49
+0/gerena-free-fire-top-grossing-mobile-battle-royale-game.jpg');">
+                    <div class="carousel-content">
+                        <h1>Special Offer!</h1>
+                        <p>Get exclusive discounts on select games</p>
+                        <a href="#">Shop Now</a>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: 
+url('https://cdn.mos.cms.futurecdn.net/eoPRwfEmW3mBzMTeA75bej.jpg');" background-
+size="cover">
+                    <div class="carousel-content">
+                        <h1>Join the Community!</h1>
+                        <p>Connect with fellow gamers and share your experiences</p>
+                        <a href="#">Join Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="arrow prev" onclick="prevSlide()">&#10094;</button>
+                <button class="arrow next" onclick="nextSlide()">&#10095;</button>
+            </div>
+            <div class="carousel-indicators">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </div>
+    </div>
+
+    <section class="featured-games">
+        <h2>Featured Games</h2>
+        <div class="game-card">
+            <img src="https://img.freepik.com/premium-photo/gamer-virtual-reality-cyber-
+games-explosion-background-video-game_726745-7960.jpg" alt="Game 1">
+            <h2> world of warcraft</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="game-card">
+            <img src="https://wallpaperaccess.com/full/3034612.jpg" alt="Game 2">
+            <h2> gunsutter</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="game-card">
+            <img 
+src="https://i.pinimg.com/originals/24/70/6f/24706f49f5dc287610bbba22979fb9ff.jpg" 
+alt="Game 3">
+            <h2> wanted war</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </section>
+
+    <section class="news-updates">
+        <h2>News and Updates</h2>
+        <div class="news-item">
+            <img src="https://img.freepik.com/free-photo/group-friends-playing-
+console_23-2147824900.jpg?
+w=740&t=st=1717219489~exp=1717220089~hmac=aba286f006178e122e541d068d8cafdb2acebfc207156d3
+6efbd6b83659d050a" alt="News 1">
+            <h2>Our beloved game just got an epic update, and trust me, you won’t want to 
+miss out on all the new goodies.<a href=""> learn more</a> </h2>
+            
+        </div>
+        <div class="news-item">
+            <img src="https://img.freepik.com/premium-vector/gradient-sports-news-
+background_23-2151390942.jpg?w=740" alt="News 2">
+            <h2> Join forces with other players in a massive multiplayer siege event. 
+Blackstone Keep is heavily fortified, and its defenders are fierce <a href="">learn 
+more</a></h2>
+        </div>
+        <div class="news-item">
+            <img src="https://img.freepik.com/premium-photo/medium-shot-roommates-
+bedroom_23-2149358511.jpg?w=740" alt="News 3">
+            <h2> Our beloved game just got an epic update, and trust me, you won’t want 
+to miss out on all the new goodies.<a href="">learn more</a></h2>
+        </div>
+    </section>
+
+    <section class="community-highlights">
+        <h2>Community Highlights</h2>
+        <div class="highlight-card">
+          <img src="https://pbs.twimg.com/media/FQuyDWVWQA4BjCf.jpg:large" alt="Community 
+1">
+          <h2>Get ready to kick off the summer season with a bang because the Wanted War 
+Summer Festival is here! It's time to gather your friends, sharpen your swords, and join 
+us for a week-long celebration filled with fun, challenges, and plenty of rewards. <a 
+href="news"> learn more</a></h2>
+        </div>
+        <div class="highlight-card">
+          <img src="https://i.redd.it/xlujju8oazdb1.jpg" alt="Community 2">
+          <h2>Get ready to kick off the summer season with a bang because the Wanted War 
+Summer Festival is here! It's time to gather your friends, sharpen your swords, and join 
+us for a week-long celebration filled with fun, challenges, and plenty of rewards. <a 
+href="news"> learn more</a></h2>
+        </div>
+        <div class="highlight-card">
+          <img src="https://preview.redd.it/foxhole-fan-art-silverhand-shaman-tank-by-
+paul-freland-v0-b9p8ks0wiuta1.jpg?auto=webp&s=86913eed07724070d882d236e255d15ffdab3272" 
+alt="Community 3">
+          <h2>Get ready to kick off the summer season with a bang because the Wanted War 
+Summer Festival is here! It's time to gather your friends, sharpen your swords, and join 
+us for a week-long celebration filled with fun, challenges, and plenty of rewards. <a 
+href="news"> learn more</a></h2>
+        </div>
+        </section>
+        
+        <script>
+          window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+              header.classList.add('scrolled');
+            } else {
+              header.classList.remove('scrolled');
+            }
+          });
+        
+          function toggleMenu() {
+            const nav = document.getElementById('nav');
+            nav.classList.toggle('open');
+          }
+        
+          let slideIndex = 1;
+          showSlide(slideIndex);
+        
+          function nextSlide() {
+            showSlide(slideIndex += 1);
+          }
+        
+          function prevSlide() {
+            showSlide(slideIndex -= 1);
+          }
+        
+          function currentSlide(n) {
+            showSlide(slideIndex = n);
+          }
+        
+          function showSlide(n) {
+            let i;
+            const slides = document.getElementsByClassName("carousel-slide");
+            const dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+          }
+        </script>
+        </body>
+        
+        </html>
