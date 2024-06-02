@@ -1,0 +1,228 @@
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #1c1c1c;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-right input {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.user-avatar {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #1c1c1c;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.user-avatar:hover .dropdown {
+    display: block;
+}
+
+.dropdown a {
+    display: block;
+    color: #ffffff;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.dropdown a:hover {
+    background-color: #333;
+}
+
+.hero {
+    background: url('https://play-lh.googleusercontent.com/wkK3jiQQWFGboNJ2_zINe2eXueLc0uGuHN6zT3Rv550k8BEsOGyduxEX7H7gXDIQRd4=w2560-h1440-rw') no-repeat center center/cover;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4500;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.top-games {
+    padding: 40px 20px;
+}
+
+.top-games h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.game-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.game-item {
+    flex: 1;
+    padding: 20px;
+    background-color: #1c1c1c;
+    border-radius: 5px;
+    text-align: center;
+    min-width: 300px;
+}
+
+.game-item img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.game-item h3 {
+    margin-top: 10px;
+    font-size: 24px;
+}
+
+.game-item p {
+    margin: 10px 0;
+}
+
+.game-item span {
+    display: block;
+    margin: 10px 0;
+    color: #ffcc00;
+}
+
+.game-item button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4500;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #1c1c1c;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-links a {
+    color: #ffffff;
+    margin: 0 10px;
+    text-decoration: none;
+    margin-bottom: 10px;
+
+}
+.footer-links a::after{
+    content: " |";
+
+}
+
+.social-media a {
+    color: #ffffff;
+    margin: 0 10px;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.social-media a i {
+    margin-top: 10px;
+    text-decoration: none;
+    font-size: 24px;
+    margin: 0 10px;
+    color: #ffffff;
+    padding: 10px;
+    background-color: #ff4500;
+    border-radius: 50%;
+    margin-top: 50px;
+
+}
+
+.newsletter  {
+    background-color: #1c1c1c;
+    text-align: center;
+    border: 1px solid #ff4500;
+    margin-top: 50px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+}
+.newsletter input{
+    padding: 5px;
+    border: none;
+    outline:none;
+    background-color: inherit ;
+    color: white;
+   
+   
+}
+
+.newsletter button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #ff4500;
+    color: #ffffff;
+    cursor: pointer;
+    float:right;
+}
